@@ -1,4 +1,7 @@
 import time #Importar la librería para calcular el tiempo total de ejecución
+import numpy as np # Importar la librería para mostrar la gráfica
+import pylab as pl # Importar librería para la graficación
+from memory_profiler import memory_usage #Importar la librería para calcular el uso de memoria
 
 # Definición de la función getBuckets que calcula los rangos de índices para cada carácter en la cadena T
 def getBuckets(T):
@@ -119,26 +122,31 @@ def sais(T):
 
     return SA  # Devuelve el Suffix Array calculado
 
+if __name__ == '__main__':
 
-start_time = time.time() #Comienza el conteo del tiempo 
+    start_time = time.time() #Comienza el conteo del tiempo 
 
-# Cadena de entrada
-string = "GTCCCGATGTCATGTCAGGA$"
-with open('archivo.txt', 'r') as file:  #Se abre el archivo a examinar y se almacena en la variable string
-    string = file.read()
-    # string = ' '
-    # for line in file:
-    #     string += file.readline()
+    def openFile(filename):
+        f=open(filename,encoding="utf8")
+        return f.read()
 
-print(string)
-print(type(string))
+    string = openFile("frankenstein.txt")
+    # Cadena de entrada
+    # string = "GTCCCGATGTCATGTCAGGA$"
 
-print("SAIS:")
-# Convierte cada carácter de la cadena en su valor ASCII y almacena los valores en la lista T
-T = [ord(c) for c in string]
+    print("SAIS:")
+    # Convierte cada carácter de la cadena en su valor ASCII y almacena los valores en la lista T
+    T = [ord(c) for c in string]
+    T.append(0)
 
-# Llama a la función para calcular el Suffix Array con la cadena T anteriormente calculada
-SA = sais(T)
+    # Llama a la función para calcular el Suffix Array con la cadena T anteriormente calculada
+    SA = sais(T)
 
-print(SA) # Imprime el Suffix Array
-print("%s seconds" % (time.time() - start_time)) # Imprime el tiempo total de ejcución
+    print(SA) # Imprime el Suffix Array
+    print("%s seconds" % (time.time() - start_time)) # Imprime el tiempo total de ejcución
+    memoryUsage = memory_usage((sais, (T, )), interval = 0.01) # Se guarda el registro del uso de memoria en una lista
+    pl.plot(np.arange(len(memoryUsage)) * 0.1, memoryUsage, label = 'SA-IS Algorithm') #Se mandan los datos para graficar
+    pl.title('Consumo de memoria') #Se define el título y el label de x y y
+    pl.xlabel('Tiempo (S)')
+    pl.ylabel('Uso de memoria')
+    pl.show() #Se manda a mostrar la gráfica

@@ -284,17 +284,17 @@ int main(int argc, char* argv[]) {
     std::clock_t end = std::clock();
     double elapsed = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
-    map<int,pair<int,int>> buckets=getBuckets(T);
-        std::cout << "KEY ELEMENT\n";
-        for (auto itr = buckets.begin(); itr != buckets.end(); ++itr) {
-            cout << itr->first << " " << itr->second.first<<" "<<itr->second.second<<"\n";
-        cout<<endl;
-        }
+    // map<int,pair<int,int>> buckets=getBuckets(T);
+    //     std::cout << "KEY ELEMENT\n";
+    //     for (auto itr = buckets.begin(); itr != buckets.end(); ++itr) {
+    //         cout << itr->first << " " << itr->second.first<<" "<<itr->second.second<<"\n";
+    //     cout<<endl;
+    //     }
     
-    cout << "*****SAIS*****" << endl;
-    for (int i = 0; i < SA.size(); i++) {
-      cout << SA[i] << " ";
-    }
+    // cout << "*****SAIS*****" << endl;
+    // for (int i = 0; i < SA.size(); i++) {
+    //   cout << SA[i] << " ";
+    // }
 
     cout << endl;
 
