@@ -1,3 +1,5 @@
+import time #Importar la librería para calcular el tiempo total de ejecución
+
 # Definición de la función getBuckets que calcula los rangos de índices para cada carácter en la cadena T
 def getBuckets(T):
     count = {}  # Diccionario para contar la frecuencia de cada carácter
@@ -9,7 +11,6 @@ def getBuckets(T):
     for c in sorted(count.keys()):  # Itera a través de los carácteres ordenados en el diccionario count
         # Calcula y almacena los rangos de índices para cada carácter en buckets
         buckets[c] = (start, start + count[c])
-        print(buckets[c])
         start += count[c]  # Actualiza el valor de start
 
     return buckets  # Devuelve el diccionario buckets con los rangos de índices
@@ -19,7 +20,7 @@ def sais(T):
     t = ["_"] * len(T)  # Inicializa una lista de etiquetas t con "_" de longitud igual a la cadena T
     
     t[len(T) - 1] = "S"  # La última etiqueta se establece en "S"
-    for i in range(len(T) - 1, 0, -1):  # Itera a través de la cadena de atrás hacia adelante
+    for i in range(len(T) - 1, 0, -1):  # Itera a través de la cadena de atrás hacia adelante, de forma que se establece los S y L
         if T[i-1] == T[i]:  # Compara caracteres adyacentes
             t[i - 1] = t[i]  # Asigna la misma etiqueta que el siguiente caracter
         else:
@@ -65,7 +66,7 @@ def sais(T):
     namesp = [-1] * len(T)  # Inicializa una lista de nombres de sufijos con -1
     name = 0  # Inicializa el contador de nombres
     prev = None  # Inicializa la variable prev como None
-
+    
     for i in range(len(SA)):  # Itera a través de SA
         if t[SA[i]] == "S" and t[SA[i] - 1] == "L":  # Verifica si el sufijo es Sufijo pequeño (S) y Sufijo largo (L)
             if prev is not None and T[SA[prev]:LMS[SA[prev]]] != T[SA[i]:LMS[SA[i]]]:
@@ -76,7 +77,6 @@ def sais(T):
 
     names = []  # Inicializa una lista de nombres
     SApIdx = []  # Inicializa una lista de índices de sufijos LMS
-
     for i in range(len(T)):  # Itera a través de la cadena T
         if namesp[i] != -1:  # Si el nombre no es -1
             names.append(namesp[i])  # Agrega el nombre a la lista
@@ -109,7 +109,6 @@ def sais(T):
                 count[symbol] = offset + 1  # Actualiza el offset en el diccionario count
 
     count = {}  # Reinicia el diccionario count
-
     # Itera a través de SA para ordenar los sufijos S según sus símbolos
     for i in range(len(T) - 1, 0, -1):  # Itera desde el final hacia el principio de SA
         if SA[i] > 0:  # Si la posición en SA es mayor que 0
@@ -120,14 +119,26 @@ def sais(T):
 
     return SA  # Devuelve el Suffix Array calculado
 
+
+start_time = time.time() #Comienza el conteo del tiempo 
+
 # Cadena de entrada
 string = "GTCCCGATGTCATGTCAGGA$"
+with open('archivo.txt', 'r') as file:  #Se abre el archivo a examinar y se almacena en la variable string
+    string = file.read()
+    # string = ' '
+    # for line in file:
+    #     string += file.readline()
 
+print(string)
+print(type(string))
+
+print("SAIS:")
 # Convierte cada carácter de la cadena en su valor ASCII y almacena los valores en la lista T
 T = [ord(c) for c in string]
 
-# Llama a la función sais para calcular el Suffix Array y almacena el resultado en la variable SA
+# Llama a la función para calcular el Suffix Array con la cadena T anteriormente calculada
 SA = sais(T)
 
-# Imprime el Suffix Array calculado
-print(SA) 
+print(SA) # Imprime el Suffix Array
+print("%s seconds" % (time.time() - start_time)) # Imprime el tiempo total de ejcución
