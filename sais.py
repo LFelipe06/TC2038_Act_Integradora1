@@ -123,21 +123,37 @@ def sais(T):
     return SA  # Devuelve el Suffix Array calculado
 
 if __name__ == '__main__':
+    
+    choice = 4 #Declaración de la variable para la elección del libro
+    while (choice < 0 or choice > 3): #Ciclo para mostrar el menú y el usuario elija la opción
+        choice = int(input("Elige un libro a examinar\nFrankenstein = 0\nDr. Jekyll and Mr. Hyde = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n"))
+        
+    match (choice): #Declaración de la variable name con respecto a la elección elegida que se utilizará para abrir el archivo con ese nombre
+        case 0:
+            name = "frankenstein.txt"
+        case 1:
+            name = "dr_jekyll_and_mr_hyde.txt"
+        case 2:
+            name = "a_modest_proposal.txt"
+        case 3:
+            name = "the_yellow_wallpaper.txt"
+        
 
     start_time = time.time() #Comienza el conteo del tiempo 
 
-    def openFile(filename):
+    def openFile(filename): #Función para abrir el archivo en modo utf8
         f=open(filename,encoding="utf8")
         return f.read()
 
-    string = openFile("frankenstein.txt")
+    string = openFile(name) #Guardar el libro en la variable string
+    
     # Cadena de entrada
     # string = "GTCCCGATGTCATGTCAGGA$"
 
     print("SAIS:")
     # Convierte cada carácter de la cadena en su valor ASCII y almacena los valores en la lista T
     T = [ord(c) for c in string]
-    T.append(0)
+    T.append(0) #Agrega un null al final del string del archivo para la conversión en ASCII
 
     # Llama a la función para calcular el Suffix Array con la cadena T anteriormente calculada
     SA = sais(T)

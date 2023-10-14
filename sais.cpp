@@ -256,51 +256,65 @@ vector<int> allOccurrences(const string& text, const string& pattern, const vect
     return occurrences;
 }
 
-int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        std::cout << "Es necesario ejecutar el código con el nombre del archivo a examinar al final" << std::endl;
-        return 1;
+int main() {
+    int choice = 4;
+    string name;
+    
+    while (choice < 0 || choice > 3) {
+        cout << "Elige un libro a examinar\nFrankenstein = 0\nDr. Jekyll and Mr. Hyde = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n" << endl;
+        cin >> choice;
     }
 
-    const char* filename = argv[1];
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "No se pudo abrir el archivo '" << filename << "'" << std::endl;
-        return 1;
+
+    switch (choice) {
+        case 0:
+            name = "frankenstein.txt";
+            break;
+        case 1:
+            name = "dr_jekyll_and_mr_hyde.txt";
+            break;
+        case 2:
+            name = "a_modest_proposal.txt";
+            break;
+        case 3:
+            name = "the_yellow_wallpaper.txt";
+            break;
     }
 
-    std::string stringData;
-    std::string line;
-    while (std::getline(file, line)) {
+    ifstream file(name);
+
+    string stringData;
+    string line;
+    while (getline(file, line)) {
         stringData += line;
     }
     file.close();
 
-    std::vector<int> T(stringData.begin(), stringData.end());
+    vector<int> T(stringData.begin(), stringData.end());
     T.push_back(0);
 
-    std::clock_t start = std::clock();
+    clock_t start = clock();
     vector<int> SA = sais(T);
-    std::clock_t end = std::clock();
+    clock_t end = clock();
     double elapsed = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
     // map<int,pair<int,int>> buckets=getBuckets(T);
-    //     std::cout << "KEY ELEMENT\n";
+    //     cout << "KEY ELEMENT\n";
     //     for (auto itr = buckets.begin(); itr != buckets.end(); ++itr) {
     //         cout << itr->first << " " << itr->second.first<<" "<<itr->second.second<<"\n";
     //     cout<<endl;
     //     }
     
-    // cout << "*****SAIS*****" << endl;
-    // for (int i = 0; i < SA.size(); i++) {
-    //   cout << SA[i] << " ";
-    // }
+    cout << "*****SAIS*****" << endl;
+    for (int i = 0; i < SA.size(); i++) {
+      cout << SA[i] << " ";
+    }
 
     cout << endl;
 
     vector<int> ocurrences = allOccurrences(stringData, "red", SA);
   
-    std::cout << "\nTiempo de ejecución: " << elapsed << " segundos" << std::endl;
+    cout << "\nTiempo de ejecución: " << elapsed << " segundos" << endl;
 
     cout << "Número de ocurrencias: " << ocurrences.size() << endl;
 
