@@ -24,8 +24,7 @@ bool equalSubarrays(vector<int> &T, int start1, int end1, int start2, int end2)
     return true;
 }
 
-map<int, pair<int, int>> getBuckets(vector<int> T)
-{
+map<int, pair<int, int>> getBuckets(vector<int> T){
     map<int, int> count;
     map<int, pair<int, int>> buckets;
 
@@ -282,6 +281,7 @@ int main() {
     }
 
     ifstream file(name);
+    ofstream output;
 
     string stringData;
     string line;
@@ -305,18 +305,27 @@ int main() {
     //     cout<<endl;
     //     }
     
+    output.open("output.txt");
+    output << "*****SAIS*****" << endl;
+
     cout << "*****SAIS*****" << endl;
     for (int i = 0; i < SA.size(); i++) {
       cout << SA[i] << " ";
+      output <<  SA[i] << " ";
     }
 
     cout << endl;
+    output << endl;
 
     vector<int> ocurrences = allOccurrences(stringData, "red", SA);
   
     cout << "\nTiempo de ejecución: " << elapsed << " segundos" << endl;
+    output << "\nTiempo de ejecución: " << elapsed << " segundos" << endl;
 
     cout << "Número de ocurrencias: " << ocurrences.size() << endl;
+    output << "Número de ocurrencias: " << ocurrences.size() << endl;
+
+    output.close();
 
   return 0;
 }
