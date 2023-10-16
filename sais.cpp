@@ -8,7 +8,7 @@
 using namespace std;
 
 // Función que determina si dos subarreglos son iguales dentro de la cadena T
-bool findEqual(vector<int> &T, int start1, int end1, int start2, int end2)
+bool findEqual(const vector<int> &T, int start1, int end1, int start2, int end2)
 {
     if (end1 - start1 != end2 - start2)
     {
