@@ -291,9 +291,16 @@ int main() {
     string stringData;
     string line;
     while (getline(file, line)) { // Se guarda el texto en la variable stringData
-        stringData += line;
+        for (int i = 0; i < line.length(); i++) {
+        char c = line.at(i);         // se obtiene un char del string
+    
+        // Si está en ese rango, es un caracter
+        if (( ( c >= 'a' && c <= 'z' ) || ( c >= 'A' && c <= 'Z' ) ) ) {
+            stringData += c;
+            }
+        }
     }
-    file.close(); // Se cierra el texto
+    file.close();
 
     vector<int> T(stringData.begin(), stringData.end()); // Se almacena en el vector T con un caracter 0 al final para la lectura
     T.push_back(0);
@@ -322,6 +329,8 @@ int main() {
 
     cout << "Número total de ocurrencias: " << ocurrences.size() << endl;
     output << "Número total de ocurrencias: " << ocurrences.size() << endl;
+
+    cout << stringData << endl;
 
     output.close();
 

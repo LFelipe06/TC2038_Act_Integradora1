@@ -130,13 +130,13 @@ if __name__ == '__main__':
         
     match (choice): #Declaración de la variable name con respecto a la elección elegida que se utilizará para abrir el archivo con ese nombre
         case 0:
-            name = "frankenstein.txt"
+            name = "books/frankenstein.txt"
         case 1:
-            name = "dr_jekyll_and_mr_hyde.txt"
+            name = "books/dr_jekyll_and_mr_hyde.txt"
         case 2:
-            name = "a_modest_proposal.txt"
+            name = "books/a_modest_proposal.txt"
         case 3:
-            name = "the_yellow_wallpaper.txt"
+            name = "books/the_yellow_wallpaper.txt"
         
 
     start_time = time.time() #Comienza el conteo del tiempo 
@@ -145,7 +145,22 @@ if __name__ == '__main__':
         f=open(filename,encoding="utf8")
         return f.read()
 
-    string = openFile(name) #Guardar el libro en la variable string
+
+    def clearCharacters(input_file):
+        with open(input_file, 'r') as archivo_entrada:
+            contenido = archivo_entrada.read()
+
+        # Elimina espacios y saltos de línea, dejando solo letras mayúsculas, minúsculas y números
+        contenido_limpio = ''.join(caracter for caracter in contenido if caracter.isalpha())
+
+        return contenido_limpio
+
+    # Usar la función para limpiar un archivo
+    input_file = name # Reemplaza con el nombre de tu archivo de entrada
+    string = clearCharacters(input_file)
+
+    # Imprimir el resultado
+    print(string)
     
     # Cadena de entrada
     # string = "GTCCCGATGTCATGTCAGGA$"
@@ -158,6 +173,7 @@ if __name__ == '__main__':
     # Llama a la función para calcular el Suffix Array con la cadena T anteriormente calculada
     SA = sais(T)
 
+    # print(string)
     print(SA) # Imprime el Suffix Array
     print("%s seconds" % (time.time() - start_time)) # Imprime el tiempo total de ejcución
     memoryUsage = memory_usage((sais, (T, )), interval = 0.01) # Se guarda el registro del uso de memoria en una lista
