@@ -8,8 +8,8 @@
 using namespace std;
 
 // Función que determina si dos subarreglos son iguales dentro de la cadena T
-bool findEqual(vector<int> &T, int start1, int end1, int start2, int end2)
-{
+// Cambiamos a call-by-reference
+bool findEqual(const vector<int> &T, int &start1, int &end1, int &start2, int &end2){
     if (end1 - start1 != end2 - start2)
     {
         return false;
@@ -26,8 +26,8 @@ bool findEqual(vector<int> &T, int start1, int end1, int start2, int end2)
 }
 
 // De a partir de T, se calculan las cubetas requeridas
-map<int, pair<int, int>> getBuckets(vector<int> T)
-{
+// Se cambió a call-by-reference
+map<int, pair<int, int>> getBuckets(const vector<int> &T){
     map<int, int> count;
     map<int, pair<int, int>> buckets;
 
@@ -53,8 +53,8 @@ map<int, pair<int, int>> getBuckets(vector<int> T)
     return buckets;
 }
 
-vector<int> sais(vector<int> T)
-{
+// Se cambió a call-by-reference
+vector<int> sais(const vector<int> &T){
     vector<string> t(T.size(), "_"); // Se inicializa un vector vacío con el tamaño de T
     t[T.size() - 1] = "S"; 
     for (int i = T.size() - 1; i > 0; i--) // Se realiza una iteración para asignar S o L en t
@@ -306,7 +306,7 @@ int main() {
     output.open("output.txt");
     cout << "*****SAIS*****" << endl; // Se itera a trevés de SA y se imprime
     for (int i = 0; i < SA.size(); i++) {
-      cout << SA[i] << " ";
+        cout << SA[i] << " ";
         output <<  SA[i] << " ";
     }
     cout << endl;
