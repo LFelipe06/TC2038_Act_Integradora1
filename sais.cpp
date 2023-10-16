@@ -263,16 +263,16 @@ int main() {
     string name, searchOcurrence;
     
     while (choice < 0 || choice > 3) { // Ciclo para que el usuario elija un texto a examinar
-        cout << "Elige un libro a examinar\nFrankenstein = 0\nDr. Jekyll and Mr. Hyde = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n" << endl;
+        cout << "Elige un libro a examinar\nWings of the phoenix = 0\nThe Mysterious Stranger = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n" << endl;
         cin >> choice;
     }
 
     switch (choice) { // Dependiendo de la elección del usuario, se almacena el nombre del texto a examinar
         case 0:
-            name = "books/frankenstein.txt";
+            name = "books/wings_of_the_phoenix.txt";
             break;
         case 1:
-            name = "books/dr_jekyll_and_mr_hyde.txt";
+            name = "books/the_mysterious_stranger.txt";
             break;
         case 2:
             name = "books/a_modest_proposal.txt";
@@ -329,8 +329,6 @@ int main() {
 
     cout << "Número total de ocurrencias: " << ocurrences.size() << endl;
     output << "Número total de ocurrencias: " << ocurrences.size() << endl;
-
-    cout << stringData << endl;
 
     output.close();
 

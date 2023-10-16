@@ -126,13 +126,13 @@ if __name__ == '__main__':
     
     choice = 4 #Declaración de la variable para la elección del libro
     while (choice < 0 or choice > 3): #Ciclo para mostrar el menú y el usuario elija la opción
-        choice = int(input("Elige un libro a examinar\nFrankenstein = 0\nDr. Jekyll and Mr. Hyde = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n"))
+        choice = int(input("Elige un libro a examinar\Wings of the phoenix = 0\nThe Mysterious Stranger = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n"))
         
     match (choice): #Declaración de la variable name con respecto a la elección elegida que se utilizará para abrir el archivo con ese nombre
         case 0:
-            name = "books/frankenstein.txt"
+            name = "books/wings_of_the_phoenix.txt"
         case 1:
-            name = "books/dr_jekyll_and_mr_hyde.txt"
+            name = "books/the_mysterious_stranger.txt"
         case 2:
             name = "books/a_modest_proposal.txt"
         case 3:
@@ -140,11 +140,6 @@ if __name__ == '__main__':
         
 
     start_time = time.time() #Comienza el conteo del tiempo 
-
-    def openFile(filename): #Función para abrir el archivo en modo utf8
-        f=open(filename,encoding="utf8")
-        return f.read()
-
 
     def clearCharacters(input_file):
         with open(input_file, 'r') as archivo_entrada:
@@ -160,7 +155,6 @@ if __name__ == '__main__':
     string = clearCharacters(input_file)
 
     # Imprimir el resultado
-    print(string)
     
     # Cadena de entrada
     # string = "GTCCCGATGTCATGTCAGGA$"
@@ -168,12 +162,13 @@ if __name__ == '__main__':
     print("SAIS:")
     # Convierte cada carácter de la cadena en su valor ASCII y almacena los valores en la lista T
     T = [ord(c) for c in string]
+    # T.encode('ascii', errors='backslashreplace')
     T.append(0) #Agrega un null al final del string del archivo para la conversión en ASCII
 
     # Llama a la función para calcular el Suffix Array con la cadena T anteriormente calculada
     SA = sais(T)
 
-    # print(string)
+
     print(SA) # Imprime el Suffix Array
     print("%s seconds" % (time.time() - start_time)) # Imprime el tiempo total de ejcución
     memoryUsage = memory_usage((sais, (T, )), interval = 0.01) # Se guarda el registro del uso de memoria en una lista
