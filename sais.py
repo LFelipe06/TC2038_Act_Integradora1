@@ -142,7 +142,7 @@ if __name__ == '__main__':
     start_time = time.time() #Comienza el conteo del tiempo 
 
     def clearCharacters(input_file):
-        with open(input_file, 'r') as archivo_entrada:
+        with open(input_file, 'r', encoding="ascii", errors="ignore") as archivo_entrada:
             contenido = archivo_entrada.read()
 
         # Elimina espacios y saltos de línea, dejando solo letras mayúsculas, minúsculas y números
