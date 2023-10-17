@@ -222,16 +222,16 @@ vector<int> sais(vector<int> T)
     return SA;
 }
 
-int searchString(const string& text, const string& stringToSearch, const vector<int>& SA) { // Función para buscar algún string
+vector <int> searchString(const string& text, const string& stringToSearch, const vector<int>& SA) { // Función para buscar algún string
     int left = 0;
     int right = text.length() - 1;
-    int firstOccurrence = -1;
-
+    // int firstOccurrence = -1;
+    vector<int> occurrences;
     while (left <= right) { // Ciclo que compara el string a buscar con los sufijos en SA
         int mid = (left + right) / 2; // Comienza en la mitad de los subarreglos SA
         string suffix = text.substr(SA[mid]);
         if (suffix.compare(0, stringToSearch.length(), stringToSearch) == 0) { //Si la búsqueda coincide, la primera ocurrencia es igual a mid y se continua buscando en mid -1 
-            firstOccurrence = mid;
+            occurrences.push_back(mid);
             right = mid - 1;  // Continuar buscando a la izquierda
         } else if (stringToSearch < suffix) { // se continúa buscando a la izquierda si el sufijo es patron es menor
             right = mid - 1;
@@ -240,21 +240,6 @@ int searchString(const string& text, const string& stringToSearch, const vector<
         }
     }
 
-    return firstOccurrence;
-}
-
-vector<int> allOccurrences(const string& text, const string& stringToSearch, const vector<int>& SA) { //Función para buscar todas las ocurrencias en el SA
-    int firstOccurrence = searchString(text, stringToSearch, SA); // Llama a la función searchString para buscar la primera ocurrencia
-    if (firstOccurrence == -1) { //Si no se encuentra ninguna ocurrencia, se almacena un -1 en el vector, indicando que no existen ocurrencias
-        return vector<int>(1, -1);
-    }
-    int i = firstOccurrence;
-    vector<int> occurrences;
-    while (text.substr(SA[i]).compare(0, stringToSearch.length(), stringToSearch) == 0) { //Ciclo para encontrar todas las ocurrencias que se almacenan en la variable ocurrences
-        occurrences.push_back(SA[i]);
-        i++;
-    }
-    sort(occurrences.begin(), occurrences.end()); // Se ordenan las ocurrencias dentro del vector
     return occurrences;
 }
 
@@ -319,16 +304,22 @@ int main() {
     cout << endl;
     output << endl;
 
-    vector<int> ocurrences = allOccurrences(stringData, searchOcurrence, SA); // Se almacenan las ocurrencias
+    vector<int> occurrences = searchString(stringData, searchOcurrence, SA); // Se almacenan las ocurrencias
   
     cout << "\nTiempo de ejecución: " << elapsed << " segundos" << endl; 
     output << "\nTiempo de ejecución: " << elapsed << " segundos" << endl;
 
-    cout << "La primera ocurrencia de: " << searchOcurrence << " se encuentra en: " << searchString(stringData, searchOcurrence, SA) << endl;
-    output << "La primera ocurrencia de: " << searchOcurrence << " se encuentra en: " << searchString(stringData, searchOcurrence, SA) << endl;
+    cout << "La primera ocurrencia de: " << searchOcurrence << " se encuentra en: " << occurrences[occurrences.size() - 1] << endl;
+    output << "La primera ocurrencia de: " << searchOcurrence << " se encuentra en: " << occurrences[occurrences.size() - 1] << endl;
 
-    cout << "Número total de ocurrencias: " << ocurrences.size() << endl;
-    output << "Número total de ocurrencias: " << ocurrences.size() << endl;
+    cout << "Número total de ocurrencias: " << occurrences[0] - occurrences[occurrences.size() - 1] << endl;
+    output << "Número total de ocurrencias: " << occurrences[0] - occurrences[occurrences.size() - 1] << endl;
+
+    int i = 0;
+        while (i < (occurrences[0] - occurrences[occurrences.size() - 1])) {
+            cout << occurrences[0] + i << endl;
+            i++;
+    }
 
     output.close();
 
