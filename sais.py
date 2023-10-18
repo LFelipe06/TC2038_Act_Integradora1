@@ -126,7 +126,7 @@ if __name__ == '__main__':
     
     choice = 4 #Declaración de la variable para la elección del libro
     while (choice < 0 or choice > 3): #Ciclo para mostrar el menú y el usuario elija la opción
-        choice = int(input("Elige un libro a examinar\Wings of the phoenix = 0\nThe Mysterious Stranger = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n"))
+        choice = int(input("Elige un libro a examinar\nWings of the phoenix = 0\nThe Mysterious Stranger = 1\nA Modest Proposal = 2\nThe Yellow Wallpaper = 3\n"))
         
     match (choice): #Declaración de la variable name con respecto a la elección elegida que se utilizará para abrir el archivo con ese nombre
         case 0:
